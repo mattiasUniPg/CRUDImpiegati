@@ -1,0 +1,45 @@
+﻿@model IEnumerable<ImpiegatoViewModel>
+
+@{
+    ViewBag.Title = "Impiegati Index";
+}
+
+<h1 class="display-4">Lista Impiegati</h1>
+
+<p class="text-right">@Html.ActionLink("Aggiungi nuovo impiegato","Aggiungi") </p>
+
+
+
+
+<table class="table">
+    <tr>
+        <th>@Html.DisplayNameFor(model => model.Nome)</th>
+        <th>@Html.DisplayNameFor(model => model.Cognome)</th>
+        <th>@Html.DisplayNameFor(model => model.Città)</th>
+        <th>@Html.DisplayNameFor(model => model.Salario)</th>
+    </tr>
+    @if (Model != null && Model.Any())
+    {
+        foreach (var impiegato in Model)
+        {
+            <tr>
+                <td>@impiegato.Nome</td>
+                <td>@impiegato.Cognome</td>
+                <td>@impiegato.Città</td>
+                <td>@impiegato.Salario</td>
+                <td>
+                    @Html.ActionLink("Modifica","Modifica",new {ID = impiegato.ID})|
+                    @Html.ActionLink("Visualizza","Visualizza",new {ID = impiegato.ID})|
+                    @Html.ActionLink("Cancella","Cancella",new {ID = impiegato.ID})
+                </td>
+            </tr>
+        }
+    }
+    else
+    {
+        <tr>
+            <td colspan="5" class="text-center"> Nessun impiegato disponibile</td>
+        </tr>
+    }
+</table>
+
